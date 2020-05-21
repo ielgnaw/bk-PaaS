@@ -18,11 +18,11 @@ pids
 *.0
 .example-cache
 .idea
-lib/client/.webpack_cache
+client/.webpack_cache
 **/.webpack_cache
 **/webpack_cache
 **/dist/
-lib/client/static/lib-manifest.json
-lib/client/static/lib.bundle.js
-lib/client/static/vue-layout-demo*.vue
-!lib/client/static/ResizeSensor.js
+client/static/lib-manifest.json
+client/static/lib.bundle.js
+client/static/vue-layout-demo*.vue
+!client/static/ResizeSensor.js

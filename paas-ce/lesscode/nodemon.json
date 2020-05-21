@@ -2,16 +2,17 @@
     "restartable": "rs",
     "ignore": [
         ".git",
-        "node_modules"
+        "node_modules",
+        "client"
     ],
     "verbose": false,
     "execMap": {
-        "js": "node lib/server/app.browser.js"
+        "js": "node app.dev.js"
     },
     "events": {
     },
     "watch": [
-        "lib/server"
+        "."
     ],
     "env": {
         "NODE_ENV": "development"

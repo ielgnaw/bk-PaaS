@@ -26,10 +26,10 @@ const mode = process.env.NODE_ENV === 'production' ? 'production' : 'development
 if (!(manifestExist & bundleExist)) {
     // 需要打包到一起的 js 文件
     const vendors = [
-        resolve(__dirname, '../../../node_modules', 'vue'),
-        resolve(__dirname, '../../../node_modules', 'vuex'),
-        resolve(__dirname, '../../../node_modules', 'vue-router'),
-        resolve(__dirname, '../../../node_modules', 'axios')
+        resolve(__dirname, '../../node_modules', 'vue'),
+        resolve(__dirname, '../../node_modules', 'vuex'),
+        resolve(__dirname, '../../node_modules', 'vue-router'),
+        resolve(__dirname, '../../node_modules', 'axios')
     ]
 
     const clientDLLConf = {
@@ -50,7 +50,6 @@ if (!(manifestExist & bundleExist)) {
             new webpack.DllPlugin({
                 path: resolve(__dirname, '..', 'static', '[name]-manifest.json'),
                 name: '[name]_[chunkhash]',
-                // context: __dirname
                 context: resolve(__dirname, '..', 'static')
             }),
 
