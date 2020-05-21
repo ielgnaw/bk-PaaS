@@ -24,8 +24,6 @@ const dealJS = (compilation, opts) => {
 
     const minifyJSFileContent = asset.source().replace(
         /\"\{\{STATIC_URL\}\}\"/g,
-        // () => clientConf.build.env.APP_CODE + '/'
-        // () => `${clientConf.build.env.APP_CODE} + "/"`
         () => 'window.STATIC_URL + "/"'
     )
 

@@ -28,28 +28,20 @@ const webpackConfig = merge(baseConf, {
         main: [resolve(__dirname, '..', 'src/main.js')]
     },
 
-    // output: {
-    //     path: resolve(__dirname, '..', 'dist'),
-    //     filename: '[name].js',
-    //     // publicPath: process.env.NODE_ENV === 'development' ? '/' : process.env.APP_CODE + '/'
-    //     // publicPath: '/'
-    //     publicPath: clientConf.dev.assetsPublicPath
-    // },
-
     module: {
         rules: [
             {
                 test: /\.(css|postcss)$/,
                 use: [
-                    resolve(__dirname, '../../../node_modules', 'vue-style-loader'),
+                    resolve(__dirname, '../../node_modules', 'vue-style-loader'),
                     {
-                        loader: resolve(__dirname, '../../../node_modules', 'css-loader'),
+                        loader: resolve(__dirname, '../../node_modules', 'css-loader'),
                         options: {
                             importLoaders: 1
                         }
                     },
                     {
-                        loader: resolve(__dirname, '../../../node_modules', 'postcss-loader'),
+                        loader: resolve(__dirname, '../../node_modules', 'postcss-loader'),
                         options: {
                             ident: 'postcss',
                             plugins: loader => postcssPlugins(loader)

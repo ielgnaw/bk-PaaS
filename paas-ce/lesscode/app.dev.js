@@ -25,7 +25,7 @@ const convert = require('koa-convert')
 
 const { accessLogger, applicationLogger, devLogger } = require('./logger')
 const { getIP } = require('./util')
-const webpackDevConf = require('../../lib/client/build/webpack.dev.conf')
+const webpackDevConf = require('./client/build/webpack.dev.conf')
 const { routes, allowedMethods } = require('./router')
 
 const authMiddleware = require('./middleware/auth')
@@ -37,7 +37,6 @@ const httpConf = require('./conf/http')
 
 async function startServer () {
     const PORT = httpConf.port
-    const IS_DEV = process.env.NODE_ENV === 'development'
 
     const app = new Koa()
 
@@ -68,7 +67,7 @@ async function startServer () {
         }
     })
 
-    const logger = IS_DEV ? devLogger : applicationLogger
+    const logger = devLogger
     // logger.trace('trace:', +new Date())
     // logger.debug('debug:', +new Date())
     // logger.info('info:', +new Date())
@@ -95,13 +94,13 @@ async function startServer () {
     app.use(jsonSendMiddleware())
 
     app.use(koaMount(
-        '/static', koaStatic(resolve(__dirname, '..', IS_DEV ? 'client/static' : 'client/dist/static')))
+        '/static', koaStatic(resolve(__dirname, '..', 'client/static')))
     )
 
     app.use(convert.compose(routes))
     app.use(convert.compose(allowedMethods))
 
-    app.context.render = views(resolve(__dirname, '..', IS_DEV ? 'client' : 'client/dist'), {
+    app.context.render = views(resolve(__dirname, '..','client'), {
         map: { html: 'swig' }
     })
 
@@ -123,27 +122,17 @@ async function startServer () {
         ]
     }))
 
-    if (IS_DEV) {
-        const compiler = webpack(webpackDevConf)
-        app.use(await koaWebpack({
-            compiler: compiler,
-            hotClient: {
-                allEntries: true
-            },
-            devMiddleware: {
-                publicPath: webpackDevConf.output.publicPath,
-                quiet: true
-            }
-        }))
-    } else {
-        // app.use(async (ctx, next) => {
-        //     if (ctx.status === 404) {
-        //         ctx.body = `${ctx.url} ${ctx.originalUrl} is Not Found`
-        //     } else {
-        //         await next()
-        //     }
-        // })
-    }
+    const compiler = webpack(webpackDevConf)
+    app.use(await koaWebpack({
+        compiler: compiler,
+        hotClient: {
+            allEntries: true
+        },
+        devMiddleware: {
+            publicPath: webpackDevConf.output.publicPath,
+            quiet: true
+        }
+    }))
 
     const server = http.createServer(app.callback())
     server.listen(PORT)

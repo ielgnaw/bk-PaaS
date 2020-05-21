@@ -93,50 +93,5 @@ module.exports = function (loader) {
         // 颜色函数
         // @see https://github.com/postcss/postcss-color-function#postcss-color-function--
         postcssColorFunction()
-
-        // // 把 import 的内容转换为 inline
-        // // @see https://github.com/postcss/postcss-import#postcss-import
-        // postcssImport(),
-
-        // // mixins，本插件需要放在 postcss-simple-vars 和 postcss-nested 插件前面
-        // // @see https://github.com/postcss/postcss-mixins#postcss-mixins-
-        // postcssMixins(),
-
-        // // 用于在 URL ( )上重新定位、内嵌或复制。
-        // // @see https://github.com/postcss/postcss-url#postcss-url
-        // postcssUrl({
-        //     url: 'rebase'
-        // }),
-
-        // // cssnext 已经不再维护，推荐使用 postcss-preset-env
-        // postcssPresetEnv({
-        //     // see https://github.com/csstools/postcss-preset-env#options
-        //     stage: 0,
-        //     autoprefixer: {
-        //         browsers: ['last 2 versions'],
-        //         grid: true
-        //     },
-        //     browsers: ['last 2 versions']
-        // }),
-
-        // // 这个插件可以在写 nested 样式时省略开头的 &
-        // // @see https://github.com/postcss/postcss-nested#postcss-nested-
-        // postcssNested(),
-
-        // // 将 @at-root 里的规则放入到根节点
-        // // @see https://github.com/OEvgeny/postcss-atroot#postcss-at-root-
-        // postcssAtroot(),
-
-        // // 提供 @extend 语法
-        // // @see https://github.com/jonathantneal/postcss-extend-rule#postcss-extend-rule-
-        // postcssExtendRule(),
-
-        // // 变量相关
-        // // @see https://github.com/jonathantneal/postcss-advanced-variables#postcss-advanced-variables-
-        // postcssAdvancedVariables(),
-
-        // // 类似于 stylus，直接引用属性而不需要变量定义
-        // // @see https://github.com/simonsmith/postcss-property-lookup#postcss-property-lookup-
-        // postcssPropertyLookup()
     ]
 }
