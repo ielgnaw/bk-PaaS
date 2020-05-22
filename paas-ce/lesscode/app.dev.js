@@ -15,7 +15,7 @@ const Koa = require('koa')
 const bodyparser = require('koa-bodyparser')
 const json = require('koa-json')
 const koaStatic = require('koa-static')
-const views = require('co-views')
+const views = require('koa-views')
 const koaMount = require('koa-mount')
 const chalk = require('chalk')
 const { historyApiFallback } = require('koa2-connect-history-api-fallback')
@@ -23,15 +23,15 @@ const webpack = require('webpack')
 const koaWebpack = require('koa-webpack')
 const convert = require('koa-convert')
 
-const { accessLogger, applicationLogger, devLogger } = require('./logger')
+const { accessLogger, devLogger } = require('./logger')
 const { getIP } = require('./util')
 const webpackDevConf = require('./client/build/webpack.dev.conf')
-const { routes, allowedMethods } = require('./router')
+const { routes, allowedMethods } = require('./routers')
 
-const authMiddleware = require('./middleware/auth')
-const httpMiddleware = require('./middleware/http')
-const errorMiddleware = require('./middleware/error')
-const jsonSendMiddleware = require('./middleware/json-send')
+const authMiddleware = require('./middlewares/auth')
+const httpMiddleware = require('./middlewares/http')
+const errorMiddleware = require('./middlewares/error')
+const jsonSendMiddleware = require('./middlewares/json-send')
 const { CODE } = require('./util')
 const httpConf = require('./conf/http')
 
@@ -94,15 +94,18 @@ async function startServer () {
     app.use(jsonSendMiddleware())
 
     app.use(koaMount(
-        '/static', koaStatic(resolve(__dirname, '..', 'client/static')))
+        '/static', koaStatic(resolve(__dirname,  'client/static')))
     )
 
     app.use(convert.compose(routes))
     app.use(convert.compose(allowedMethods))
 
-    app.context.render = views(resolve(__dirname, '..','client'), {
-        map: { html: 'swig' }
-    })
+    // app.context.render = views(resolve(__dirname, 'client'), {
+    //     map: { html: 'swig' }
+    // })
+    app.use(views(resolve(__dirname, 'client'), {
+        map: { html: 'handlebars' }
+    }))
 
     app.use(historyApiFallback({
         verbose: false,

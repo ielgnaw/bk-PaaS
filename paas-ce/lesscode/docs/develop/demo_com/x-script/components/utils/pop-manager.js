@@ -124,7 +124,7 @@ function uuid () {
                 document.body.style.overflow = 'hidden'
             },
             hideModalMask: function () {
-                this.dialogMask.setAttribute('style', `display: none;`)
+                this.dialogMask.setAttribute('style', 'display: none;')
                 document.body.style.overflow = ''
             },
             __hideInstance: function (instance) {

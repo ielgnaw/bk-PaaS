@@ -27,6 +27,15 @@ module.exports = {
     },
     // add your custom rules hered
     rules: {
+        // https://eslint.org/docs/rules/no-case-declarations
+        'no-case-declarations': 'off',
+        // https://eslint.org/docs/rules/dot-notation
+        'dot-notation': 'off',
+        // https://eslint.org/docs/rules/no-prototype-builtins
+        'no-prototype-builtins': 'off',
+        // https://eslint.org/docs/rules/quote-props
+        'quote-props': 'off',
+
         // https://eslint.org/docs/rules/brace-style
         'brace-style': ['error', '1tbs', { 'allowSingleLine': false }],
 
